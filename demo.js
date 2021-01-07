@@ -1,5 +1,6 @@
 var scene, camera, renderer, mesh;
 var meshFloor, floorTexture;
+var crate, crateTexture, crateNormalMap, crateBumpMap;
 
 var keyboard = {};
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
@@ -20,10 +21,10 @@ function init(){
 	scene.add(mesh);
     
     var textureLoader = new THREE.TextureLoader();
-    floorTexture = new textureLoader.load("floortexture/lantai.png")
+    floorTexture = new textureLoader.load("floortexture/lantairumput.jpg")
 
 	meshFloor = new THREE.Mesh(
-		new THREE.PlaneGeometry(20,20, 20,20),
+		new THREE.PlaneGeometry(100,100, 100,100),
         new THREE.MeshPhongMaterial({color:0xffffff, map: floorTexture})
         // new THREE.MeshBasicMaterial({color:0xffffff, map: floorTexture})
 	);
@@ -33,7 +34,7 @@ function init(){
 	scene.add(meshFloor);
     
     // LIGHTS
-	ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+	ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 	scene.add(ambientLight);
 	
 	light = new THREE.PointLight(0xffffff, 0.8, 18);
@@ -42,7 +43,28 @@ function init(){
 	// Will not light anything closer than 0.1 units or further than 25 units
 	light.shadow.camera.near = 0.1;
 	light.shadow.camera.far = 25;
-	scene.add(light);
+    scene.add(light);
+    
+    // Load texture
+    crateTexture = textureLoader.load("crate0/crate0_diffuse.png");
+	crateBumpMap = textureLoader.load("crate0/crate0_bump.png");
+	crateNormalMap = textureLoader.load("crate0/crate0_normal.png");
+	
+	// Create mesh with these textures
+	crate = new THREE.Mesh(
+		new THREE.BoxGeometry(3,3,3),
+		new THREE.MeshPhongMaterial({
+			color:0xffffff,
+			
+			map:crateTexture,
+			bumpMap:crateBumpMap,
+			normalMap:crateNormalMap
+		})
+	);
+	scene.add(crate);
+	crate.position.set(10, 5, 3);
+	crate.receiveShadow = true;
+    crate.castShadow = true;
 
 	camera.position.set(0, player.height, -5);
 	camera.lookAt(new THREE.Vector3(0,player.height,0));
@@ -58,6 +80,7 @@ function init(){
 	
 	animate();
 }
+
 
 function animate(){
 	requestAnimationFrame(animate);
