@@ -2,13 +2,17 @@ var scene, camera, renderer, mesh;
 var meshFloor, floorTexture;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
+const mouse = new THREE.Vector2();
+const target = new THREE.Vector2();
+const windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
+
 var keyboard = {};
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
 var USE_WIREFRAME = false;
 
 function init(){
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000);
+	camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500);
 	
 	mesh = new THREE.Mesh(
 		new THREE.BoxGeometry(1,1,1),
@@ -77,13 +81,19 @@ function init(){
 	renderer.shadowMap.type = THREE.BasicShadowMap;
 
 	document.body.appendChild(renderer.domElement);
-	
+
+	document.addEventListener( 'mousemove', onMouseMove, false );
+	window.addEventListener( 'resize', onResize, false );
+
 	animate();
 }
 
 
 function animate(){
-	requestAnimationFrame(animate);
+	console.log("windowhalf x " + windowHalf.x + 
+				"\n windowhalf y " + windowHalf.y +
+				"\n mouse x " + mouse.x +
+				"\n mouse y " + mouse.y);
 	
 	mesh.rotation.x += 0.01;
 	mesh.rotation.y += 0.02;
@@ -114,7 +124,13 @@ function animate(){
 	if(keyboard[39]){ // right arrow key
 		camera.rotation.y += player.turnSpeed;
 	}
+	target.x = ( 1 - mouse.x ) * 0.002;
+	target.y = ( 1 - mouse.y ) * 0.002;
 	
+	camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
+	camera.rotation.y += 0.05 * ( target.x - camera.rotation.y );
+
+	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
 }
 
@@ -124,6 +140,24 @@ function keyDown(event){
 
 function keyUp(event){
 	keyboard[event.keyCode] = false;
+}
+function onMouseMove( event ) {
+
+	mouse.x = ( event.clientX - windowHalf.x );
+	mouse.y = ( event.clientY - windowHalf.x );
+
+}
+function onResize( event ) {
+
+	const width = window.innerWidth;
+	const height = window.innerHeight;
+  
+  windowHalf.set( width / 2, height / 2 );
+	
+  camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+	renderer.setSize( width, height );
+				
 }
 
 window.addEventListener('keydown', keyDown);
