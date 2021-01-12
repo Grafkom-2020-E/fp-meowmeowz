@@ -28,21 +28,21 @@ function init(){
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000);
 	
-	mesh = new THREE.Mesh(
-		new THREE.BoxGeometry(1,1,1),
-		new THREE.MeshPhongMaterial({color:0xff4444, wireframe:USE_WIREFRAME})
-	);
-	mesh.position.y += 1; // Move the mesh up 1 meter
-	// The cube can have shadows cast onto it, and it can cast shadows
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;
-	scene.add(mesh);
+	// mesh = new THREE.Mesh(
+	// 	new THREE.BoxGeometry(1,1,1),
+	// 	new THREE.MeshPhongMaterial({color:0xff4444, wireframe:USE_WIREFRAME})
+	// );
+	// mesh.position.y += 1; // Move the mesh up 1 meter
+	// // The cube can have shadows cast onto it, and it can cast shadows
+	// mesh.receiveShadow = true;
+	// mesh.castShadow = true;
+	// scene.add(mesh);
     
     var textureLoader = new THREE.TextureLoader();
     floorTexture = new textureLoader.load("assets/floortexture/lantairumput.jpg")
 
 	meshFloor = new THREE.Mesh(
-		new THREE.PlaneGeometry(100,100, 100,100),
+		new THREE.PlaneGeometry(50,100, 150,150),
         new THREE.MeshPhongMaterial({color:0xffffff, map: floorTexture})
         // new THREE.MeshBasicMaterial({color:0xffffff, map: floorTexture})
 	);
@@ -85,6 +85,32 @@ function init(){
     crate.castShadow = true;
 
 
+	// Wall loading!
+	var mtlLoader = new THREE.MTLLoader();
+	mtlLoader.load("assets/tembok/wall.mtl", function(materials){
+		
+		materials.preload();
+		var objLoader = new THREE.OBJLoader();
+		objLoader.setMaterials(materials);
+		
+		objLoader.load("assets/tembok/wall.obj", function(mesh){
+		
+			mesh.traverse(function(node){
+				if( node instanceof THREE.Mesh ){
+					node.castShadow = true;
+					node.receiveShadow = true;
+				}
+			});
+		
+			scene.add(mesh);
+			mesh.position.set(-5, 0, 4);
+			// mesh.rotation.y = -Math.PI/4;
+			mesh.scale.set(3,3,3);
+			// mesh.rotation.set(0, 360, 0);
+		});
+		
+	});
+
 	// Model/material loading!
 	var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.load("assets/models/4bil.mtl", function(materials){
@@ -106,6 +132,7 @@ function init(){
 			mesh.position.set(-5, 4, 4);
 			mesh.rotation.y = -Math.PI/4;
 			mesh.rotation.set(0, 360, 0);
+			mesh.scale.set(0.5,0.5,0.5);
 		});
 		
 	});
@@ -177,8 +204,8 @@ function init(){
 function animate(){
 	requestAnimationFrame(animate);
 	
-	mesh.rotation.x += 0.01;
-	mesh.rotation.y += 0.02;
+	// mesh.rotation.x += 0.01;
+	// mesh.rotation.y += 0.02;
 	
 	// Keyboard movement inputs
 	if(keyboard[87]){ // W key
