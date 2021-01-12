@@ -103,7 +103,7 @@ function init(){
 			});
 		
 			scene.add(mesh);
-			mesh.position.set(-5, 0, 4);
+			mesh.position.set(-4, 0, 0);
 			// mesh.rotation.y = -Math.PI/4;
 			mesh.scale.set(3,3,3);
 			// mesh.rotation.set(0, 360, 0);
@@ -113,13 +113,13 @@ function init(){
 
 	// Model/material loading!
 	var mtlLoader = new THREE.MTLLoader();
-	mtlLoader.load("assets/models/4bil.mtl", function(materials){
+	mtlLoader.load("assets/models/target bola/4/4.mtl", function(materials){
 		
 		materials.preload();
 		var objLoader = new THREE.OBJLoader();
 		objLoader.setMaterials(materials);
 		
-		objLoader.load("assets/models/4bil.obj", function(mesh){
+		objLoader.load("assets/models/target bola/4/4.obj", function(mesh){
 		
 			mesh.traverse(function(node){
 				if( node instanceof THREE.Mesh ){
