@@ -93,7 +93,7 @@ function init(){
 	scene.add(ambientLight);
 	
 	light = new THREE.PointLight(0xffffff, 0.8, 18);
-	light.position.set(15,15,10);
+	light.position.set(10,10,10);
 	light.castShadow = true;
 	//tidak menerangi yang lebih dekat dari 0.1 dan lebih dari 25 unit
 	light.shadow.camera.near = 0.1;
@@ -183,6 +183,7 @@ function onResourcesLoaded(){
 	meshes["pistol"].scale.set(0.2, 0.2, 0.2);
 	scene.add(meshes["pistol"]);
 }
+
 
 function animate(){
 	frameCount++;
