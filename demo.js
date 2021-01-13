@@ -80,7 +80,7 @@ function init(){
     floorTexture = new textureLoader.load("assets/floortexture/lantairumput.jpg")
 
 	meshFloor = new THREE.Mesh(
-		new THREE.PlaneGeometry(50,100, 150,150),
+		new THREE.PlaneGeometry(100,100, 150,150),
         new THREE.MeshPhongMaterial({color:0xffffff, map: floorTexture})
 	);
 	meshFloor.rotation.x -= Math.PI / 2; //90 derajat
@@ -93,16 +93,16 @@ function init(){
 	scene.add(ambientLight);
 	
 	light = new THREE.PointLight(0xffffff, 0.8, 18);
-	light.position.set(10,15,0);
+	light.position.set(15,15,10);
 	light.castShadow = true;
 	//tidak menerangi yang lebih dekat dari 0.1 dan lebih dari 25 unit
 	light.shadow.camera.near = 0.1;
 	light.shadow.camera.far = 25;
 	scene.add(light);
 	
-	// Create mesh with these textures
-	crate = new THREE.Mesh(
-		new THREE.BoxGeometry(3,3,3),
+	// // Create mesh with these textures
+	// crate = new THREE.Mesh(
+	// 	new THREE.BoxGeometry(3,3,3),
 	// Load models
 	for( var _key in models ){
 		(function(key){
@@ -139,7 +139,7 @@ function init(){
     // Enable Shadows in the Renderer
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.BasicShadowMap;
-	renderer.setClearColor( 0xffffff );
+	// renderer.setClearColor( 0xffffff );
 
 	document.body.appendChild(renderer.domElement);
 	
@@ -155,21 +155,26 @@ function onResourcesLoaded(){
 	meshes["target3"] = models.target3.mesh.clone();
 
 	// atur posisi setiap mesh dan add
-	meshes["target1"].position.set(-5, 2, 4);
+	meshes["target1"].position.set(15, 2, 15);
 	scene.add(meshes["target1"]);
+	meshes["target1"].scale.set(0.5, 0.5, 0.5);
 	
-	meshes["target2"].position.set(-8, 2, 4);
+	meshes["target2"].position.set(19, 2, 15);
 	scene.add(meshes["target2"]);
+	meshes["target2"].scale.set(0.5, 0.5, 0.5);
 	
-	meshes["target3"].position.set(-5, 2, 1);
+	meshes["target3"].position.set(23, 2, 13);
 	scene.add(meshes["target3"]);
+	meshes["target3"].scale.set(0.5, 0.5, 0.5);
 		
 
 
 	//Tembok
 	meshes["tembok"] = models.tembok.mesh.clone();
-	meshes["tembok"].position.set(-4, 0, 0);
+	meshes["tembok"].position.set(-10, 0, 20);
 	meshes["tembok"].scale.set(3,3,3);
+	meshes["tembok"].rotation.y = Math.PI / 2;
+	// meshes["tembok"].rotate.set(180);
 	scene.add(meshes["tembok"]);
 
 	//pistol
