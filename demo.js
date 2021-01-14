@@ -219,12 +219,14 @@ function onResourcesLoaded(){
 	meshes["target2"].scale.set(0.5, 0.5, 0.5);
 	
 	meshes["target3"].position.set(6, 3, 15);
+	meshes["target3"].rotation.set(0, 360, 0);
 	scene.add(meshes["target3"]);
 	meshes["target3"].scale.set(0.5, 0.5, 0.5);
-		
+	 
 	meshes["target4"].position.set(6, 5, 15);
+	meshes["target4"].rotation.set(0, 360, 0);
 	scene.add(meshes["target4"]);
- 	meshes["target4"].scale.set(0.5, 0.5, 0.5);
+	 meshes["target4"].scale.set(0.5, 0.5, 0.5);
 
  	meshes["target5"].position.set(-5, 3, 15);
  	scene.add(meshes["target5"]);
