@@ -18,7 +18,6 @@ var loadingScreen = {
 
 var loadingManager = null;
 var RESOURCES_LOADED = false;
-var frameCount = 0;
 
 // Models index
 var models = {
@@ -299,12 +298,9 @@ function onResourcesLoaded(){
 
 
 function animate(){
-	frameCount++;
-	// camera.rotation.y = controls.
-	if (frameCount % 100 == 0) {
-		// console.log(bullets.length + "     \n" + camera.rotation.x + ", \n" + camera.rotation.y + ", \n" + camera.rotation.z + "\n scene " + scene.children.length);
-		// console.log(controls.getDirection());
-	}
+
+	var posVal = Math.round(camera.position.x) + " " + Math.round(camera.position.y) + " " + Math.round(camera.position.z);
+    document.getElementById('info').innerHTML =  "position: "+posVal;
 	
 	if (meshes["target1"]) meshes["target1"].rotation.y += 0.05;
 	if (meshes["target2"]) meshes["target2"].rotation.y += 0.05;
