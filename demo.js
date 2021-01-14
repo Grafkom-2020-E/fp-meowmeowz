@@ -37,14 +37,49 @@ var models = {
 		mtl:"assets/models/target bola/3/3.mtl",
 		mesh: null
 	},
+	target4 : {
+		obj:"assets/models/target bola/4/4.obj",
+		mtl:"assets/models/target bola/4/4.mtl",
+		mesh: null
+	},
+	target5 : {
+		obj:"assets/models/target bola/5/5.obj",
+		mtl:"assets/models/target bola/5/5.mtl",
+		mesh: null
+    },
+	target6 : {
+		obj:"assets/models/target bola/6/6.obj",
+		mtl:"assets/models/target bola/6/6.mtl",
+		mesh: null
+	},
+	target7 : {
+		obj:"assets/models/target bola/7/7.obj",
+		mtl:"assets/models/target bola/7/7.mtl",
+		mesh: null
+	},
+	target8 : {
+		obj:"assets/models/target bola/8/8.obj",
+		mtl:"assets/models/target bola/8/8.mtl",
+		mesh: null
+	},
+	target9 : {
+		obj:"assets/models/target bola/9/9.obj",
+		mtl:"assets/models/target bola/9/9.mtl",
+		mesh: null
+	},
+	target10 : {
+		obj:"assets/models/target bola/10/10.obj",
+		mtl:"assets/models/target bola/10/10.mtl",
+		mesh: null
+	},
 	pistol : {
 		obj:"assets/models/pistol/pistol.obj",
 		mtl:"assets/models/pistol/pistol.mtl",
 		mesh: null
 	},
 	tembok : {
-		obj:"assets/tembok/wall.obj",
-		mtl:"assets/tembok/wall.mtl",
+		obj:"assets/tembok/wallnew.obj",
+		mtl:"assets/tembok/wallnew.mtl",
 		mesh: null
 	}
 };
@@ -161,21 +196,54 @@ function onResourcesLoaded(){
 	meshes["target1"] = models.target1.mesh.clone();
 	meshes["target2"] = models.target2.mesh.clone();
 	meshes["target3"] = models.target3.mesh.clone();
+	meshes["target4"] = models.target4.mesh.clone();
+ 	meshes["target5"] = models.target5.mesh.clone();
+ 	meshes["target6"] = models.target6.mesh.clone();
+ 	meshes["target7"] = models.target7.mesh.clone();
+ 	meshes["target8"] = models.target8.mesh.clone();
+ 	meshes["target9"] = models.target9.mesh.clone();
+	meshes["target10"] = models.target10.mesh.clone();
 
 	// atur posisi setiap mesh dan add
-	meshes["target1"].position.set(15, 2, 15);
+	meshes["target1"].position.set(21, 3, 15);
 	scene.add(meshes["target1"]);
 	meshes["target1"].scale.set(0.5, 0.5, 0.5);
 	
-	meshes["target2"].position.set(19, 2, 15);
+	meshes["target2"].position.set(17, 3, 15);
 	scene.add(meshes["target2"]);
 	meshes["target2"].scale.set(0.5, 0.5, 0.5);
 	
-	meshes["target3"].position.set(23, 2, 13);
+	meshes["target3"].position.set(6, 3, 15);
 	scene.add(meshes["target3"]);
 	meshes["target3"].scale.set(0.5, 0.5, 0.5);
 		
+	meshes["target4"].position.set(6, 5, 15);
+	scene.add(meshes["target4"]);
+ 	meshes["target4"].scale.set(0.5, 0.5, 0.5);
 
+ 	meshes["target5"].position.set(-5, 3, 15);
+ 	scene.add(meshes["target5"]);
+ 	meshes["target5"].scale.set(0.5, 0.5, 0.5);
+
+ 	meshes["target6"].position.set(-9, 3, 15);
+	scene.add(meshes["target6"]);
+ 	meshes["target6"].scale.set(0.5, 0.5, 0.5);
+
+ 	meshes["target7"].position.set(-20, 3, 15);
+ 	scene.add(meshes["target7"]);
+ 	meshes["target7"].scale.set(0.5, 0.5, 0.5);
+
+ 	meshes["target8"].position.set(-20, 5, 15);
+ 	scene.add(meshes["target8"]);
+ 	meshes["target8"].scale.set(0.5, 0.5, 0.5);
+
+ 	meshes["target9"].position.set(-30, 3, 15);
+ 	scene.add(meshes["target9"]);
+ 	meshes["target9"].scale.set(0.5, 0.5, 0.5);
+
+ 	meshes["target10"].position.set(-35, 3, 15);
+ 	scene.add(meshes["target10"]);
+ 	meshes["target10"].scale.set(0.5, 0.5, 0.5);
 
 	//Tembok
 	meshes["tembok"] = models.tembok.mesh.clone();
