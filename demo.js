@@ -368,7 +368,7 @@ function animate(){
     meshes["pistol"].position.set(
         camera.position.x - Math.sin(camera.rotation.y + Math.PI/6) * 0.75,
         camera.position.y - 0.5 + Math.sin(time*4 + camera.position.x + camera.position.z)*0.01,
-        camera.position.z - Math.cos(camera.rotation.y + Math.PI/6) * 0.75
+        camera.position.z - Math.cos(camera.rotation.y + Math.PI/6) * 1.4
     );
     meshes["pistol"].rotation.set(
         -camera.rotation.x,
