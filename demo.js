@@ -387,43 +387,7 @@ function animate(){
 	if(keyboard[39]){ // right arrow 
 		camera.rotation.y -= player.turnSpeed;
 	}
-	//tembak
-	if(keyboard[32] && player.canShoot <= 0){ // spacebar key
-		// creates a bullet as a Mesh object
-		var bullet = new THREE.Mesh(
-			new THREE.SphereGeometry(0.5,8,8),
-			new THREE.MeshBasicMaterial({color:0xffffff})
-		);
-		//benerin bullet position
-		// peluru di ujung pistol
-		bullet.position.set(
-			meshes["pistol"].position.x ,
-			meshes["pistol"].position.y + 0.15,
-			meshes["pistol"].position.z -0.3
-		);
-		
-		// bullet speed
-		bullet.velocity = new THREE.Vector3(
-			-Math.sin(camera.rotation.y),
-			0,
-			-Math.cos(camera.rotation.y)//, camera.rotation.y
-		);
-		
-		// after 1000ms, set alive to false and remove from scene
-		// setting alive to false flags our update code to remove
-		// the bullet from the bullets array
-		bullet.alive = true;
-		setTimeout(function(){
-			bullet.alive = false;
-			scene.remove(bullet);
-		}, 1000);
-		
-		// add to scene, array, and delay set @frame
-		bullets.push(bullet);
-		scene.add(bullet);
-		player.canShoot = 100;
-	}
-	if(player.canShoot > 0) player.canShoot -= 1;
+
 
 	//set posisi camera agar seakan di tangan user
     meshes["pistol"].position.set(
@@ -442,14 +406,56 @@ function animate(){
 
 function keyDown(event){
 	keyboard[event.keyCode] = true;
+
 }
 
 function keyUp(event){
 	keyboard[event.keyCode] = false;
 }
+function onMouseDown() {
+		//tembak
+		// if(player.canShoot <= 0){ // spacebar key
+			// creates a bullet as a Mesh object
+			var bullet = new THREE.Mesh(
+				new THREE.SphereGeometry(0.5,8,8),
+				new THREE.MeshBasicMaterial({color:0xffffff})
+			);
+			//benerin bullet position
+			// peluru di ujung pistol
+			bullet.position.set(
+				meshes["pistol"].position.x ,
+				meshes["pistol"].position.y + 0.15,
+				meshes["pistol"].position.z -0.3
+			);
+			
+			// bullet speed
+			bullet.velocity = new THREE.Vector3(
+				-Math.sin(camera.rotation.y),
+				0,
+				-Math.cos(camera.rotation.y)//, camera.rotation.y
+			);
+			
+			// after 1000ms, set alive to false and remove from scene
+			// setting alive to false flags our update code to remove
+			// the bullet from the bullets array
+			bullet.alive = true;
+			setTimeout(function(){
+				bullet.alive = false;
+				scene.remove(bullet);
+			}, 1000);
+			
+			// add to scene, array, and delay set @frame
+			bullets.push(bullet);
+			scene.add(bullet);
+			player.canShoot = 100;
+		// }
+		// if(player.canShoot > 0) player.canShoot -= 1;
+}
+
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
+window.addEventListener("mousedown", onMouseDown);
 
 
 window.onload = init;
