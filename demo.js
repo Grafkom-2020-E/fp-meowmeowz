@@ -249,13 +249,15 @@ function onResourcesLoaded(){
 	scene.add(meshes["target8"]);
 	meshes["target8"].scale.set(0.5, 0.5, 0.5);
 
- 	meshes["target9"].position.set(-30, 3, 15);
- 	scene.add(meshes["target9"]);
- 	meshes["target9"].scale.set(0.5, 0.5, 0.5);
-
- 	meshes["target10"].position.set(-35, 3, 15);
- 	scene.add(meshes["target10"]);
- 	meshes["target10"].scale.set(0.5, 0.5, 0.5);
+	meshes["target9"].position.set(-30, 3, 15);
+	meshes["target9"].rotation.set(0, 360, 0); 
+	scene.add(meshes["target9"]);
+	 meshes["target9"].scale.set(0.5, 0.5, 0.5);
+   
+	 meshes["target10"].position.set(-35, 3, 15);
+	meshes["target10"].rotation.set(0, 360, 0); 
+	scene.add(meshes["target10"]);
+	 meshes["target10"].scale.set(0.5, 0.5, 0.5);
 
 	//Tembok
 	meshes["tembok"] = models.tembok.mesh.clone();
