@@ -208,8 +208,11 @@ function onResourcesLoaded(){
 
 	// atur posisi setiap mesh dan add
 	meshes["target1"].position.set(21, 3, 15);
+	meshes["target1"].rotation.set(0, 360, 0);
 	scene.add(meshes["target1"]);
 	meshes["target1"].scale.set(0.5, 0.5, 0.5);
+	// meshes["target1"].rotation.x += 0.01;
+	// meshes["target1"].rotation.y += 0.02;
 	
 	meshes["target2"].position.set(17, 3, 15);
 	scene.add(meshes["target2"]);
@@ -271,6 +274,8 @@ function animate(){
 		// console.log(controls.getDirection());
 	}
 	
+	if (meshes["target1"]) meshes["target1"].rotation.y += 0.05;
+
 	// console.log(camera.position.x + ", " + camera.position.z);
 	// // loading sampai ter render semua.
 	if( RESOURCES_LOADED == false ){
