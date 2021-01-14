@@ -1,10 +1,10 @@
-var scene, camera, renderer, mesh;
+var scene, camera, renderer, mesh, controls;
 var meshFloor, floorTexture;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
 
 var keyboard = {};
-var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02, canShoot:0 };
+var player = { height:1.8, speed:0.15, turnSpeed:Math.PI*0.02, canShoot:0 };
 var USE_WIREFRAME = false;
 
 var loadingScreen = {
@@ -182,7 +182,7 @@ function init(){
 	document.body.appendChild(renderer.domElement);
 
 		//mouse cam
-	var controls = new THREE.PointerLockControls(camera, renderer.domElement);
+	controls = new THREE.PointerLockControls(camera, renderer.domElement);
     document.body.addEventListener( 'click', function () {
         //lock mouse on screen
         controls.lock();
@@ -265,8 +265,10 @@ function onResourcesLoaded(){
 
 function animate(){
 	frameCount++;
+	// camera.rotation.y = controls.
 	if (frameCount % 100 == 0) {
-		console.log(bullets.length + "     " + camera.position.x + ", " + camera.position.z + " scene " + scene.children.length);
+		// console.log(bullets.length + "     \n" + camera.rotation.x + ", \n" + camera.rotation.y + ", \n" + camera.rotation.z + "\n scene " + scene.children.length);
+		// console.log(controls.getDirection());
 	}
 	
 	// console.log(camera.position.x + ", " + camera.position.z);
@@ -297,20 +299,24 @@ function animate(){
 	
 	// Keyboard move input
 	if(keyboard[87]){ // W
-		camera.position.x += Math.sin(camera.rotation.y) * player.speed;
-		camera.position.z -= Math.cos(camera.rotation.y) * player.speed;
+		// camera.position.x += Math.sin(camera.rotation.y) * player.speed;
+		// camera.position.z -= Math.cos(camera.rotation.y) * player.speed;
+		controls.moveForward(player.speed);
 	}
 	if(keyboard[83]){ // S
-		camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
-		camera.position.z += Math.cos(camera.rotation.y) * player.speed;
+		// camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
+		// camera.position.z += Math.cos(camera.rotation.y) * player.speed;
+		controls.moveForward(-player.speed);
 	}
 	if(keyboard[65]){ // A
-		camera.position.x -= Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
-		camera.position.z += Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
+		// camera.position.x -= Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
+		// camera.position.z += Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
+		controls.moveRight(-player.speed);
 	}
 	if(keyboard[68]){ // D
-		camera.position.x -= Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
-		camera.position.z += Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
+		// camera.position.x -= Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
+		// camera.position.z += Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
+		controls.moveRight(player.speed);
 	}
 	
 	// Keyboard turn inputs
