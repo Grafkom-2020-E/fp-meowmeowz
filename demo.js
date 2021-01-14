@@ -132,6 +132,7 @@ function init(){
 
 	camera.position.set(0, player.height, -5);
 	camera.lookAt(new THREE.Vector3(0,player.height,0));
+
 	
 	renderer = new THREE.WebGLRenderer();
     renderer.setSize(1280, 720);
@@ -142,6 +143,13 @@ function init(){
 	// renderer.setClearColor( 0xffffff );
 
 	document.body.appendChild(renderer.domElement);
+
+		//mouse cam
+	var controls = new THREE.PointerLockControls(camera, renderer.domElement);
+    document.body.addEventListener( 'click', function () {
+        //lock mouse on screen
+        controls.lock();
+    }, false );
 	
 	animate();
 }
