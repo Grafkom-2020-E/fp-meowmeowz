@@ -81,6 +81,11 @@ var models = {
 		obj:"assets/tembok/wallnew.obj",
 		mtl:"assets/tembok/wallnew.mtl",
 		mesh: null
+	},
+	pohon : {
+		obj:"assets/models/pohon/treePine.obj",
+		mtl:"assets/models/pohon/treePine.mtl",
+		mesh: null
 	}
 };
 
@@ -252,12 +257,12 @@ function onResourcesLoaded(){
 	meshes["target9"].position.set(-30, 3, 15);
 	meshes["target9"].rotation.set(0, 360, 0); 
 	scene.add(meshes["target9"]);
-	 meshes["target9"].scale.set(0.5, 0.5, 0.5);
+	meshes["target9"].scale.set(0.5, 0.5, 0.5);
    
-	 meshes["target10"].position.set(-35, 3, 15);
+	meshes["target10"].position.set(-35, 3, 15);
 	meshes["target10"].rotation.set(0, 360, 0); 
 	scene.add(meshes["target10"]);
-	 meshes["target10"].scale.set(0.5, 0.5, 0.5);
+	meshes["target10"].scale.set(0.5, 0.5, 0.5);
 
 	//Tembok
 	meshes["tembok"] = models.tembok.mesh.clone();
@@ -272,6 +277,12 @@ function onResourcesLoaded(){
 	meshes["pistol"].position.set(-8, 0, 1);
 	meshes["pistol"].scale.set(0.2, 0.2, 0.2);
 	scene.add(meshes["pistol"]);
+
+	// Pohon
+	meshes["pohon"] = models.pohon.mesh.clone();
+	meshes["pohon"].position.set(-35, 0, -3);
+	meshes["pohon"].scale.set(10,10,10);
+	scene.add(meshes["pohon"]);
 
 	//Reticle
 	var reticle = new THREE.Mesh(
