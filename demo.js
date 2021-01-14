@@ -226,15 +226,17 @@ function onResourcesLoaded(){
 	meshes["target4"].position.set(6, 5, 15);
 	meshes["target4"].rotation.set(0, 360, 0);
 	scene.add(meshes["target4"]);
-	 meshes["target4"].scale.set(0.5, 0.5, 0.5);
+	meshes["target4"].scale.set(0.5, 0.5, 0.5);
 
- 	meshes["target5"].position.set(-5, 3, 15);
- 	scene.add(meshes["target5"]);
- 	meshes["target5"].scale.set(0.5, 0.5, 0.5);
+	meshes["target5"].position.set(-5, 3, 15);
+	meshes["target5"].rotation.set(0, 360, 0);
+	scene.add(meshes["target5"]);
+	meshes["target5"].scale.set(0.5, 0.5, 0.5);
 
- 	meshes["target6"].position.set(-9, 3, 15);
+	meshes["target6"].position.set(-9, 3, 15);
+	meshes["target6"].rotation.set(0, 360, 0);
 	scene.add(meshes["target6"]);
- 	meshes["target6"].scale.set(0.5, 0.5, 0.5);
+	meshes["target6"].scale.set(0.5, 0.5, 0.5);
 
  	meshes["target7"].position.set(-20, 3, 15);
  	scene.add(meshes["target7"]);
@@ -277,6 +279,16 @@ function animate(){
 	}
 	
 	if (meshes["target1"]) meshes["target1"].rotation.y += 0.05;
+
+	if (meshes["target5"]){
+		meshes["target5"].rotation.x += 0.05;
+		meshes["target5"].translateY(0.1);
+	} 
+	
+	if (meshes["target6"]){
+		meshes["target6"].rotation.x += 0.05;
+		meshes["target6"].translateY(0.1);
+	} 
 
 	// console.log(camera.position.x + ", " + camera.position.z);
 	// // loading sampai ter render semua.
