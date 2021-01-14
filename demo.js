@@ -397,7 +397,7 @@ function animate(){
 		//benerin bullet position
 		// peluru di ujung pistol
 		bullet.position.set(
-			meshes["pistol"].position.x -1,
+			meshes["pistol"].position.x ,
 			meshes["pistol"].position.y + 0.15,
 			meshes["pistol"].position.z -0.3
 		);
@@ -450,5 +450,6 @@ function keyUp(event){
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
+
 
 window.onload = init;
