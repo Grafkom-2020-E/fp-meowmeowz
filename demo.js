@@ -94,11 +94,13 @@ function init(){
 	
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000);
+	camera.rotation.order = "YXZ";
+
 	clock = new THREE.Clock();
 
 	
 	loadingScreen.box.position.set(0,0,5);
-	loadingScreen.camera.lookAt(loadingScreen.box.position);
+	// loadingScreen.camera.lookAt(loadingScreen.box.position);
 	loadingScreen.scene.add(loadingScreen.box);
 
 	loadingManager = new THREE.LoadingManager();
@@ -295,28 +297,28 @@ function animate(){
 	
 	// Keyboard move input
 	if(keyboard[87]){ // W
-		camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
-		camera.position.z -= -Math.cos(camera.rotation.y) * player.speed;
+		camera.position.x += Math.sin(camera.rotation.y) * player.speed;
+		camera.position.z -= Math.cos(camera.rotation.y) * player.speed;
 	}
 	if(keyboard[83]){ // S
-		camera.position.x += Math.sin(camera.rotation.y) * player.speed;
-		camera.position.z += -Math.cos(camera.rotation.y) * player.speed;
+		camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
+		camera.position.z += Math.cos(camera.rotation.y) * player.speed;
 	}
 	if(keyboard[65]){ // A
-		camera.position.x += Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
-		camera.position.z += -Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
+		camera.position.x -= Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
+		camera.position.z += Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
 	}
 	if(keyboard[68]){ // D
-		camera.position.x += Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
-		camera.position.z += -Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
+		camera.position.x -= Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
+		camera.position.z += Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
 	}
 	
 	// Keyboard turn inputs
 	if(keyboard[37]){ // left arrow 
-		camera.rotation.y -= player.turnSpeed;
+		camera.rotation.y += player.turnSpeed;
 	}
 	if(keyboard[39]){ // right arrow 
-		camera.rotation.y += player.turnSpeed;
+		camera.rotation.y -= player.turnSpeed;
 	}
 	//tembak
 	if(keyboard[32] && player.canShoot <= 0){ // spacebar key
@@ -337,7 +339,7 @@ function animate(){
 		bullet.velocity = new THREE.Vector3(
 			-Math.sin(camera.rotation.y),
 			0,
-			Math.cos(camera.rotation.y)
+			-Math.cos(camera.rotation.y)//, camera.rotation.y
 		);
 		
 		// after 1000ms, set alive to false and remove from scene
@@ -357,16 +359,16 @@ function animate(){
 	if(player.canShoot > 0) player.canShoot -= 1;
 
 	//set posisi camera agar seakan di tangan user
-	meshes["pistol"].position.set(
-		camera.position.x - Math.sin(camera.rotation.y + Math.PI/6) * 0.75,
-		camera.position.y - 0.5 + Math.sin(time*4 + camera.position.x + camera.position.z)*0.01,
-		camera.position.z + Math.cos(camera.rotation.y + Math.PI/6) * 0.75
-	);
-	meshes["pistol"].rotation.set(
-		camera.rotation.x,
-		camera.rotation.y - Math.PI -1.5,
-		camera.rotation.z
-	);
+    meshes["pistol"].position.set(
+        camera.position.x - Math.sin(camera.rotation.y + Math.PI/6) * 0.75,
+        camera.position.y - 0.5 + Math.sin(time*4 + camera.position.x + camera.position.z)*0.01,
+        camera.position.z - Math.cos(camera.rotation.y + Math.PI/6) * 0.75
+    );
+    meshes["pistol"].rotation.set(
+        -camera.rotation.x,
+        camera.rotation.y + Math.PI +1.5,
+        camera.rotation.z 
+    );
 
 	renderer.render(scene, camera);
 }
