@@ -272,7 +272,19 @@ function onResourcesLoaded(){
 	meshes["pistol"].position.set(-8, 0, 1);
 	meshes["pistol"].scale.set(0.2, 0.2, 0.2);
 	scene.add(meshes["pistol"]);
+
+	//Reticle
+	var reticle = new THREE.Mesh(
+		new THREE.RingBufferGeometry( 0.15 * 0.15, 0.01, 16),
+		new THREE.MeshBasicMaterial( {color: 0xffff00, blending: THREE.AdditiveBlending, side: THREE.DoubleSide })
+	  );
+	  reticle.position.z = -0.5 * 3;
+	  reticle.position.y = -0.4;
+	  reticle.lookAt(camera.position)
+	  camera.add(reticle);
+	  scene.add(camera);
 }
+
 
 
 function animate(){
