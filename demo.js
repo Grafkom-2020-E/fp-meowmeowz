@@ -327,7 +327,7 @@ function animate(){
 			new THREE.SphereGeometry(0.5,8,8),
 			new THREE.MeshBasicMaterial({color:0xffffff})
 		);
-		
+		//benerin bullet position
 		// peluru di ujung pistol
 		bullet.position.set(
 			meshes["pistol"].position.x -1,
