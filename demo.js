@@ -130,7 +130,7 @@ function init(){
 	scene.add(ambientLight);
 	
 	light = new THREE.PointLight(0xffffff, 0.8, 18);
-	light.position.set(10,10,10);
+	light.position.set(-5,10,0);
 	light.castShadow = true;
 	//tidak menerangi yang lebih dekat dari 0.1 dan lebih dari 25 unit
 	light.shadow.camera.near = 0.1;
@@ -177,7 +177,7 @@ function init(){
     // Enable Shadows in the Renderer
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.BasicShadowMap;
-	// renderer.setClearColor( 0xffffff );
+	renderer.setClearColor( 0xffffff );
 
 	document.body.appendChild(renderer.domElement);
 
