@@ -1,4 +1,4 @@
-var scene, camera, renderer, mesh, controls;
+var scene, camera, renderer, mesh, controls, time, delta;
 var meshFloor, floorTexture;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
@@ -289,7 +289,7 @@ function onResourcesLoaded(){
 		new THREE.MeshBasicMaterial( {color: 0xffff00, blending: THREE.AdditiveBlending, side: THREE.DoubleSide })
 	  );
 	  reticle.position.z = -0.5 * 3;
-	  reticle.position.y = -0.4;
+	  reticle.position.y = 0;
 	  reticle.lookAt(camera.position)
 	  camera.add(reticle);
 	  scene.add(camera);
@@ -341,8 +341,8 @@ function animate(){
 		return;
 	}
 	requestAnimationFrame(animate);
-	var time = Date.now() * 0.0005;
-	var delta = clock.getDelta();
+	time = Date.now() * 0.0005;
+	delta = clock.getDelta();
 
 	for(var index=0; index<bullets.length; index+=1){
 		if( bullets[index] === undefined ) continue;
@@ -427,7 +427,7 @@ function onMouseDown() {
 			// bullet speed
 			bullet.velocity = new THREE.Vector3(
 				-Math.sin(camera.rotation.y),
-				0,
+				camera.rotation.x,
 				-Math.cos(camera.rotation.y)//, camera.rotation.y
 			);
 			
