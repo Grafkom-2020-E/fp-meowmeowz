@@ -2,6 +2,7 @@ var scene, camera, renderer, mesh, controls;
 var meshFloor, floorTexture;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
+var cubes = [];
 
 var keyboard = {};
 var player = { height:1.8, speed:0.15, turnSpeed:Math.PI*0.02, canShoot:0 };
@@ -217,11 +218,24 @@ function onResourcesLoaded(){
 	meshes["target1"].scale.set(0.5, 0.5, 0.5);
 	// meshes["target1"].rotation.x += 0.01;
 	// meshes["target1"].rotation.y += 0.02;
+
+	// var cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
+	// var cubeMaterial = new THREE.MeshLambertMaterial({color: 0xff2255});
+	// var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+	// cube.name = 'cube';
+	// scene.add(cube);
 	
 	meshes["target2"].position.set(17, 3, 15);
 	meshes["target2"].rotation.set(0, 360, 0);
 	scene.add(meshes["target2"]);
 	meshes["target2"].scale.set(0.5, 0.5, 0.5);
+
+	// var cubeMaterial2 = new THREE.MeshLambertMaterial({color: 0xff0000});
+	// var cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial2);
+	// cube2.position.set(5, 0, 0);
+	// cube2.name = 'cube-red';
+	// scene.add(cube2);
+	// cubes.push(cube2);
 	
 	meshes["target3"].position.set(6, 3, 15);
 	meshes["target3"].rotation.set(0, 360, 0);
@@ -295,6 +309,31 @@ function onResourcesLoaded(){
 	  scene.add(camera);
 }
 
+function checkCollision() {
+
+	cubes.forEach(function (cube) {
+		cube.material.transparent = false;
+		cube.material.opacity = 1.0;
+
+	});
+
+	var cube = scene.getObjectByName('cube');
+	var originPoint = cube.position.clone();
+
+	for (var vertexIndex = 0; vertexIndex < cube.geometry.vertices.length; vertexIndex++) {
+		var localVertex = cube.geometry.vertices[vertexIndex].clone();
+		var globalVertex = localVertex.applyMatrix4(cube.matrix);
+		var directionVector = globalVertex.sub(cube.position);
+
+		var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+		var collisionResults = ray.intersectObjects(cubes);
+		if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
+			console.log(collisionResults[0].object.name);
+			collisionResults[0].object.material.transparent = true;
+			collisionResults[0].object.material.opacity = 0.4;
+		}
+	}
+}
 
 
 function animate(){
@@ -396,7 +435,7 @@ function animate(){
         camera.rotation.y + Math.PI +1.5,
         camera.rotation.z 
     );
-
+	//checkCollision()
 	renderer.render(scene, camera);
 }
 
